@@ -4,6 +4,7 @@ module Lib
     ( runApp
     ) where
 
+import           Prelude                       hiding (id)
 import           Text.Blaze
 import           Text.Blaze.Html.Renderer.Text (renderHtml)
 import           Text.Blaze.Html5              (Html)
@@ -26,11 +27,16 @@ runServer = scotty 3000 $ do
   get "/favicon.png" $
     file "assets/favicon.png"
 
+  get "/style.css" $
+    file "assets/style.css"
+
 page :: Html
 page = H.html $ do
   H.head $ do
     H.title "Meme"
     H.link ! rel "icon" ! type_ "image/png" ! href "favicon.png"
+    H.link ! rel "stylesheet" ! href "style.css"
 
   H.body $
-    H.img ! src "meme.png"
+    H.div ! id "main" $
+      H.img ! src "meme.png"
