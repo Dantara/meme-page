@@ -24,6 +24,8 @@ dependencies:
 - scotty
 - blaze-html
 - blaze-markup
+- hedis
+- bytestring
 
 library:
   source-dirs: src

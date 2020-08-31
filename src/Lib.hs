@@ -5,21 +5,30 @@ module Lib
     ) where
 
 import           Prelude                       hiding (id)
+
 import           Text.Blaze
 import           Text.Blaze.Html.Renderer.Text (renderHtml)
-import           Text.Blaze.Html5              (Html)
+import           Text.Blaze.Html5              (Html, toHtml)
 import qualified Text.Blaze.Html5              as H
 import           Text.Blaze.Html5.Attributes
 
 import           Web.Scotty
 
+import           DB
+
+import           Control.Monad.IO.Class
+
+port :: Int
+port = 8000
+
 runApp :: IO ()
 runApp = runServer
 
 runServer :: IO ()
-runServer = scotty 3000 $ do
-  get "/" $
-    html $ renderHtml page
+runServer = scotty port $ do
+  get "/" $ do
+    n <- liftIO incViews
+    html $ renderHtml $ page n
 
   get "/meme.png" $
     file "assets/meme.png"
@@ -30,13 +39,14 @@ runServer = scotty 3000 $ do
   get "/style.css" $
     file "assets/style.css"
 
-page :: Html
-page = H.html $ do
+page :: Integer -> Html
+page views = H.html $ do
   H.head $ do
     H.title "Meme"
     H.link ! rel "icon" ! type_ "image/png" ! href "favicon.png"
     H.link ! rel "stylesheet" ! href "style.css"
 
   H.body $
-    H.div ! id "main" $
+    H.div ! id "main" $ do
+      H.h1 $ toHtml $ mconcat ["Views: ", show views]
       H.img ! src "meme.png"

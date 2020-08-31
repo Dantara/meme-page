@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: cfa95b0ddc1f31e4aa890a8bde9f74aa1e0099569e8c1bddcc93f5347d91b1ac
+-- hash: e365c625b8fcf666b45440084e9f29aeaf3cccbee6e1a8fe4cbcc58f61a39d38
 
 name:           meme-page
 version:        0.1.0.0
@@ -27,6 +27,8 @@ source-repository head
 
 library
   exposed-modules:
+      DB
+      Internal
       Lib
   other-modules:
       Paths_meme_page
@@ -36,6 +38,8 @@ library
       base >=4.7 && <5
     , blaze-html
     , blaze-markup
+    , bytestring
+    , hedis
     , scotty
   default-language: Haskell2010
 
@@ -50,6 +54,8 @@ executable meme-page-exe
       base >=4.7 && <5
     , blaze-html
     , blaze-markup
+    , bytestring
+    , hedis
     , meme-page
     , scotty
   default-language: Haskell2010
@@ -66,6 +72,8 @@ test-suite meme-page-test
       base >=4.7 && <5
     , blaze-html
     , blaze-markup
+    , bytestring
+    , hedis
     , meme-page
     , scotty
   default-language: Haskell2010

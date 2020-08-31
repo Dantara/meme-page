@@ -1,5 +1,7 @@
 #main {
     margin: auto;
     width: 35vw;
+    text-align: center;
     padding: 10px;
+    font-size: 18px;
 }
