@@ -1,0 +1,21 @@
+version: "3.8"
+services:
+  redis:
+    image: redis:latest
+    ports:
+      - "6379:6379"
+    restart: always
+    networks:
+      - redis-net
+  web:
+    image: meme-page:latest
+    ports:
+      - "4000:8080"
+    restart: always
+    networks:
+      - redis-net
+    depends_on:
+      - redis
+
+networks:
+  redis-net:

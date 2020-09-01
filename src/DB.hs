@@ -34,4 +34,4 @@ incViews = do
       unwrap _         = -1
 
 establishConnection :: IO Connection
-establishConnection = checkedConnect defaultConnectInfo
+establishConnection = checkedConnect defaultConnectInfo {connectHost = "redis"}

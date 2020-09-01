@@ -19,7 +19,7 @@ import           DB
 import           Control.Monad.IO.Class
 
 port :: Int
-port = 8000
+port = 8080
 
 runApp :: IO ()
 runApp = runServer
